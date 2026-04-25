@@ -1,96 +1,91 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Book Mockup Generator</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Book Mockup Generator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app-shell">
-    <section class="workspace" aria-labelledby="app-title">
-      <div class="panel controls-panel">
-        <div class="title-block">
-          <p class="eyebrow">GitHub Pages ready</p>
-          <h1 id="app-title">3D Book Mockup Generator</h1>
-          <p class="intro">Upload a front cover and export a polished standing book mockup as a PNG.</p>
-        </div>
 
-        <label class="upload-card" for="coverUpload">
-          <input id="coverUpload" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
-          <span class="upload-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img">
-              <path d="M12 15V4m0 0 4 4m-4-4-4 4M5 15v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4"/>
-            </svg>
-          </span>
-          <span>
-            <strong>Upload book cover</strong>
-            <small>PNG, JPG, WEBP, or GIF</small>
-          </span>
-        </label>
+<div class="app">
 
-        <div class="controls-grid" aria-label="Mockup settings">
-          <label>
-            <span>Thickness</span>
-            <input id="thicknessRange" type="range" min="18" max="80" value="44">
-          </label>
-          <label>
-            <span>Tilt X</span>
-            <input id="tiltXRange" type="range" min="-18" max="18" value="1">
-          </label>
-          <label>
-            <span>Tilt Y</span>
-            <input id="tiltYRange" type="range" min="-32" max="8" value="-17">
-          </label>
-          <label>
-            <span>Shadow Blur</span>
-            <input id="shadowBlurRange" type="range" min="0" max="26" value="5">
-          </label>
-          <label>
-            <span>Shadow Opacity</span>
-            <input id="shadowOpacityRange" type="range" min="0" max="60" value="28">
-          </label>
-          <label>
-            <span>Perspective</span>
-            <input id="perspectiveRange" type="range" min="650" max="1600" value="1100">
-          </label>
-        </div>
+  <div class="panel">
+    <h2>BOOK COVER</h2>
 
-        <div class="action-row">
-          <button id="downloadBtn" class="primary-btn" type="button" disabled>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/>
-            </svg>
-            Download PNG
-          </button>
-          <button id="resetViewBtn" class="secondary-btn" type="button">
-            Reset View
-          </button>
-          <button id="resetBtn" class="secondary-btn" type="button">
-            Reset
-          </button>
-        </div>
+    <label class="upload-box">
+      <input type="file" id="coverUpload" accept="image/*">
+      <span>Upload Book Cover</span>
+    </label>
 
-        <p id="statusText" class="status-text" role="status">Choose a cover image to begin.</p>
+    <h2>BOOK TITLE</h2>
+    <input type="text" id="bookTitle" placeholder="Your Book Title">
+
+    <h2>AUTHOR'S NAME</h2>
+    <input type="text" id="authorName" placeholder="Author Name">
+
+    <h2>MOCKUP STYLE</h2>
+    <select id="mockupStyle">
+      <option>Standing Book</option>
+      <option>Angled Book</option>
+      <option>Flat Book</option>
+    </select>
+
+    <div class="row">
+      <div>
+        <h2>BACKGROUND</h2>
+        <select id="bgSelect">
+          <option value="neutral">Neutral Gradient</option>
+          <option value="dark">Dark Studio</option>
+          <option value="blue">Soft Blue</option>
+        </select>
       </div>
 
-      <div class="preview-panel" aria-label="3D book preview">
-        <div class="stage">
-          <div id="bookMockup" class="book-mockup empty" aria-label="Book mockup preview">
-            <div class="book-cover">
-              <div class="placeholder">
-                <span>Upload Cover</span>
-              </div>
-            </div>
-            <div class="book-spine"></div>
-            <div class="book-pages"></div>
+      <div>
+        <h2>OUTPUT RATIO</h2>
+        <select>
+          <option>Instagram Post 1:1</option>
+          <option>Story 9:16</option>
+          <option>Landscape 16:9</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h2>SHADOW</h2>
+        <input type="range" min="0" max="40" value="18" id="shadowRange">
+      </div>
+
+      <div>
+        <h2>TILT</h2>
+        <input type="range" min="-35" max="35" value="12" id="tiltRange">
+      </div>
+    </div>
+
+    <button id="exportBtn">Export PNG</button>
+  </div>
+
+  <div class="preview-area" id="captureArea">
+    <div class="book-wrap" id="bookWrap">
+      <div class="book-shadow" id="bookShadow"></div>
+
+      <div class="book" id="book">
+        <div class="spine"></div>
+        <div class="cover" id="coverFace">
+          <div class="default-cover">
+            <div class="mini-title" id="previewTitle">Your Book Title</div>
+            <div class="mini-author" id="previewAuthor">Author Name</div>
           </div>
-          <div class="floor-shadow" aria-hidden="true"></div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
-  <script src="script.js" defer></script>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
