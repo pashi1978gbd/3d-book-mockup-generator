@@ -11,7 +11,12 @@
   --book-width: 300px;
   --book-height: 450px;
   --book-depth: 44px;
-  --book-angle: -17deg;
+  --tilt-x: 1deg;
+  --tilt-y: -17deg;
+  --scene-perspective: 1100px;
+  --shadow-blur: 5px;
+  --shadow-opacity: 0.28;
+  --shadow-soft-opacity: 0.16;
   --cover-image: none;
 }
 
@@ -242,7 +247,7 @@ button:not(:disabled):hover {
   position: relative;
   display: grid;
   place-items: center;
-  perspective: 1100px;
+  perspective: var(--scene-perspective);
 }
 
 .book-mockup {
@@ -250,7 +255,7 @@ button:not(:disabled):hover {
   height: var(--book-height);
   position: relative;
   transform-style: preserve-3d;
-  transform: rotateY(var(--book-angle)) rotateX(1deg);
+  transform: rotateY(var(--tilt-y)) rotateX(var(--tilt-x));
   transition: transform 220ms ease;
 }
 
@@ -333,8 +338,13 @@ button:not(:disabled):hover {
   bottom: 54px;
   transform: translateX(-50%) rotate(-2deg);
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(15, 23, 42, 0.28) 0%, rgba(15, 23, 42, 0.16) 42%, transparent 72%);
-  filter: blur(5px);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(15, 23, 42, var(--shadow-opacity)) 0%,
+    rgba(15, 23, 42, var(--shadow-soft-opacity)) 42%,
+    transparent 72%
+  );
+  filter: blur(var(--shadow-blur));
 }
 
 @media (max-width: 860px) {
