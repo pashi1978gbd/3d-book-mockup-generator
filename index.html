@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Book Mockup Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="workspace" aria-labelledby="app-title">
+      <div class="panel controls-panel">
+        <div class="title-block">
+          <p class="eyebrow">GitHub Pages ready</p>
+          <h1 id="app-title">3D Book Mockup Generator</h1>
+          <p class="intro">Upload a front cover and export a polished standing book mockup as a PNG.</p>
+        </div>
+
+        <label class="upload-card" for="coverUpload">
+          <input id="coverUpload" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="img">
+              <path d="M12 15V4m0 0 4 4m-4-4-4 4M5 15v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4"/>
+            </svg>
+          </span>
+          <span>
+            <strong>Upload book cover</strong>
+            <small>PNG, JPG, WEBP, or GIF</small>
+          </span>
+        </label>
+
+        <div class="controls-grid" aria-label="Mockup settings">
+          <label>
+            <span>Thickness</span>
+            <input id="thicknessRange" type="range" min="18" max="80" value="44">
+          </label>
+          <label>
+            <span>Perspective</span>
+            <input id="angleRange" type="range" min="-26" max="-8" value="-17">
+          </label>
+        </div>
+
+        <div class="action-row">
+          <button id="downloadBtn" class="primary-btn" type="button" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 21h14"/>
+            </svg>
+            Download PNG
+          </button>
+          <button id="resetBtn" class="secondary-btn" type="button">
+            Reset
+          </button>
+        </div>
+
+        <p id="statusText" class="status-text" role="status">Choose a cover image to begin.</p>
+      </div>
+
+      <div class="preview-panel" aria-label="3D book preview">
+        <div class="stage">
+          <div id="bookMockup" class="book-mockup empty" aria-label="Book mockup preview">
+            <div class="book-cover">
+              <div class="placeholder">
+                <span>Upload Cover</span>
+              </div>
+            </div>
+            <div class="book-spine"></div>
+            <div class="book-pages"></div>
+          </div>
+          <div class="floor-shadow" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
